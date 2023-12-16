@@ -44,5 +44,5 @@ jobs:
         run: docker push -a bjoggis/jonasandersen-no
       - name: Create and push manifest
         run: |
-          docker manifest create bjoggis/jonasandersen-no:latest bjoggis/jonasandersen-no:v${{ env.PROJECT_VERSION }}
+          docker manifest create bjoggis/jonasandersen-no:latest bjoggis/jonasandersen-no:v${{ env.PROJECT_VERSION }}-x86_64
           docker manifest push bjoggis/jonasandersen-no:latest
