@@ -2,8 +2,8 @@ name: Build latest master and deploy
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - v*
 
 jobs:
   build:
@@ -38,13 +38,11 @@ jobs:
       - name: Build with Maven
         run: mvn spring-boot:build-image -Pnative
 
-      - name: Find version
-        run: echo "PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
       - name: Push Images to Docker Registry
         run: docker push -a bjoggis/jonasandersen-no
       - name: Create and push manifest
         run: |
-          docker manifest create bjoggis/jonasandersen-no:v${{ env.PROJECT_VERSION }} bjoggis/jonasandersen-no:v${{ env.PROJECT_VERSION }}-x86_64
-          docker manifest push bjoggis/jonasandersen-no:v${{ env.PROJECT_VERSION }}
-          docker manifest create bjoggis/jonasandersen-no:latest bjoggis/jonasandersen-no:v${{ env.PROJECT_VERSION }}-x86_64
+          docker manifest create bjoggis/jonasandersen-no:${{ github.ref_name }} bjoggis/jonasandersen-no:${{ github.ref_name }}-x86_64
+          docker manifest push bjoggis/jonasandersen-no:${{ github.ref_name }}
+          docker manifest create bjoggis/jonasandersen-no:latest bjoggis/jonasandersen-no:${{ github.ref_name }}-x86_64
           docker manifest push bjoggis/jonasandersen-no:latest
