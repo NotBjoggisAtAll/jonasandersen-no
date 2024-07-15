@@ -1,9 +1,9 @@
-name: Build tag
+name: Build latest master and deploy
 
 on:
   push:
-    tags:
-      - v*
+    branches:
+      - master
 
 jobs:
   build:
@@ -55,7 +55,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: create-manifest
         run: |
-          docker manifest create bjoggis/jonasandersen-no:${{ github.ref_name }} --amend bjoggis/jonasandersen-no:${{ github.ref_name }}-x86_64 --amend bjoggis/jonasandersen-no:${{ github.ref_name }}-aarch_64
-          docker manifest push bjoggis/jonasandersen-no:${{ github.ref_name }}
-          docker manifest create bjoggis/jonasandersen-no:latest --amend bjoggis/jonasandersen-no:${{ github.ref_name }}-x86_64 --amend bjoggis/jonasandersen-no:${{ github.ref_name }}-aarch_64
+          docker manifest create bjoggis/jonasandersen-no:v0.0.0 --amend bjoggis/jonasandersen-no:v0.0.0-x86_64 --amend bjoggis/jonasandersen-no:v0.0.0-aarch_64
+          docker manifest push bjoggis/jonasandersen-no:v0.0.0
+          docker manifest create bjoggis/jonasandersen-no:latest --amend bjoggis/jonasandersen-no:v0.0.0-x86_64 --amend bjoggis/jonasandersen-no:v0.0.0-aarch_64
           docker manifest push bjoggis/jonasandersen-no:latest
