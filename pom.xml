@@ -58,7 +58,7 @@
             <builder>paketobuildpacks/builder-jammy-buildpackless-tiny</builder>
             <name>bjoggis/${project.artifactId}:v${project.version}-${os.detected.arch}</name>
             <buildpacks>
-              <buildpack>paketobuildpacks/java</buildpack>
+              <buildpack>paketobuildpacks/java-native-image</buildpack>
             </buildpacks>
             <env>
               <BP_JVM_VERSION>22</BP_JVM_VERSION>
