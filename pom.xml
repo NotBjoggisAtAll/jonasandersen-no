@@ -62,6 +62,8 @@
             </buildpacks>
             <env>
               <BP_JVM_VERSION>22</BP_JVM_VERSION>
+              <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>-H:-AddAllFileSystemProviders</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
+              <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
             </env>
           </image>
         </configuration>
